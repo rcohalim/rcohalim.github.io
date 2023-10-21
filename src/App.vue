@@ -2,6 +2,36 @@
 import { RouterLink, RouterView } from 'vue-router'
 import HomeHeader from './layouts/HomeHeader.vue'
 import HomeFooter from './layouts/HomeFooter.vue'
+
+import { ref, onMounted, onBeforeUnmount, onBeforeMount } from 'vue';
+import { gsap } from 'gsap';
+
+onBeforeMount(() => {
+  const cursor = document.querySelector('cursor')
+  const follower = document.querySelector('follower')
+
+  document.addEventListener("mousemove", onMouseMove);
+
+  // Event Handlers
+  function onMouseMove(e) {
+    // console.log(e.x, e.y);
+    gsap.to(follower, 0.4, {
+      x: e.clientX - 18,
+      y: e.clientY - 18
+    });
+    gsap.to(cursor, 0.1, {
+      x: e.clientX - 4,
+      y: e.clientY - 4
+    });
+  }
+})
+
+// onBeforeUnmount(() => {
+//   if (cursor) {
+//     window.removeEventListener("mousemove", updateMousePosition);
+//   }
+// });
+
 </script>
 
 <template>
@@ -10,7 +40,12 @@ import HomeFooter from './layouts/HomeFooter.vue'
     <RouterView />
     <footer>My App Footer</footer>
   </div>
- 
+
+  <div class="cursor">
+  </div>
+
+  <div class="follower">
+  </div>
 </template>
 
 <style scoped>
@@ -74,5 +109,27 @@ nav a:first-of-type {
     padding: 1rem 0;
     margin-top: 1rem;
   }
+}
+
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #fff;
+  z-index: 2000;
+}
+
+.follower {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 100px;
+  background-color: #0ef;
+  border-radius: 50%;
+  opacity: 0.7;
 }
 </style>

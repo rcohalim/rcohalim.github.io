@@ -6,7 +6,10 @@
 }
 
 :root {
+}
 
+* {
+  /* cursor: none; */
 }
 
 @font-face {
@@ -24,8 +27,24 @@ body {
   margin: 0;
   padding: 0;
   /* background: linear-gradient(to bottom, #000000, #FFA933); */
-  background-color: #18172d;
+  background-color: #16162c;
   color: white;
   font-family: raleway_f, sans-serif;
   line-height: 1.55;
 }
+
+#cursor {
+  pointer-events: none;
+  .cursor-circle {
+    position: fixed;
+    top: 0;
+    left: 0;
+    mix-blend-mode: difference;
+    z-index: 1000;
+
+    circle {
+      fill: #a18248;
+    }
+  }
+}
+
